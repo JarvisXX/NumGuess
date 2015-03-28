@@ -1,40 +1,30 @@
 # include <cstdlib> 
 # include <ctime> 
 # include <iostream>
+# include <cstring>
 using namespace std;
 
-int a, b, c;
 int T_time, F_time;
+bool mark[10] = {0};
  
-int rand_num_1()
-{	srand(time(0));
-    a = rand()%10;
-    return a;
-}
-    
-int rand_num_2()
-{	srand(time(0));
-	do 
-	{b = rand()%10;
-    } while(b == a);
-    return b;
-}
-
-int rand_num_3()
-{	srand(time(0));
-	do 
-	{c = rand()%10;
-    } while (c == a or c == b);
-    return c;
-}
+int rand_num()
+{	int num;
+	srand(time(0));
+	do
+	{	num = rand()%10;
+    } while(mark[num] == 1);
+	mark[num] = 1;
+	return num;
+} 
 
 int play_the_game() 
 {	int rand_array[3], input_array[3];
 	int m, i, j, p, q;
 	m = 0;
-	rand_array[0] = rand_num_1();
-	rand_array[1] = rand_num_2();
-	rand_array[2] = rand_num_3();
+	memset(mark,0,sizeof(mark));
+	rand_array[0] = rand_num();
+	rand_array[1] = rand_num();
+	rand_array[2] = rand_num();
 	//cout << rand_array[0] << rand_array[1] << rand_array[2] << endl;
 	while (m < 7)
 	{	p = 0;
